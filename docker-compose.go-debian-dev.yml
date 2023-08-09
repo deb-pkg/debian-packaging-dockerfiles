@@ -1,0 +1,20 @@
+version: "3"
+services:
+  go-debian-dev:
+    build:
+      context: ./go-debian-dev
+    volumes:
+      - /home/eniko/workspace/ethereum/clients/docker/packages:/package # Map host directory to container directory
+    environment:
+      - GOPROXY=direct
+    env_file:
+      - .env
+    networks:
+      - app-network # Connect athens-proxy to the app-network
+    tty: true
+    stdin_open: true
+    entrypoint: ["bash"]
+    container_name: go-debian-dev
+networks:
+  app-network: # User-defined bridge network
+    driver: bridge
