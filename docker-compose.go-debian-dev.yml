@@ -1,20 +1,37 @@
 version: "3"
 services:
+  go-proxy:
+    image: goproxy/goproxy:latest
+    container_name: go-proxy
+    volumes:
+      - go-proxy-data:/go
+    environment:
+      - GOSUMDB=off
+      - GOPROXY=https://proxy.golang.org,direct
+    ports:
+      - "8081:8081"
+
   go-debian-dev:
     build:
       context: ./go-debian-dev
     volumes:
-      - /home/eniko/workspace/ethereum/clients/docker/packages:/package # Map host directory to container directory
+      - ${PACKAGE_DIR}:/package
     environment:
-      - GOPROXY=direct
+      - http_proxy=http://go-proxy:8081
+      - https_proxy=http://go-proxy:8081
     env_file:
       - .env
     networks:
-      - app-network # Connect athens-proxy to the app-network
+      - app-network
     tty: true
     stdin_open: true
     entrypoint: ["bash"]
     container_name: go-debian-dev
+
 networks:
-  app-network: # User-defined bridge network
+  app-network:
     driver: bridge
+
+volumes:
+  go-proxy-data:
+    driver: local
