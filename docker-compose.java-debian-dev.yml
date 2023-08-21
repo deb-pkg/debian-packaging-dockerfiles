@@ -13,7 +13,7 @@ services:
     networks:
       - my-network
 
-  go-debian-dev:
+  java-debian-dev:
     build:
       context: ./go-debian-dev
     environment:
@@ -32,7 +32,7 @@ services:
     tty: true
     stdin_open: true
     entrypoint: ["bash"]
-    container_name: go-debian-dev
+    container_name: java-debian-dev
 
 networks:
   my-network:

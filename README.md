@@ -1,6 +1,6 @@
-# Docker Compose Setup for Debian Packaging Development
+# Docker Setup for Debian Packaging Development
 
-This repository contains a Docker Compose setup for facilitating Debian packaging development. It includes configurations for containers/
+This repository contains a Docker setup for facilitating Debian packaging development. It includes configurations for containers/
 
 ## Prerequisites
 
@@ -28,13 +28,13 @@ This repository contains a Docker Compose setup for facilitating Debian packagin
 3. Build and run the Docker containers:
 
    ```bash
-   docker-compose -f docker-compose.go-debian-dev.yml up -d --remove-orphans
+   docker-compose -f docker-compose.go-debian-dev.yml up -d --build go-debian-dev
    ```
 
 4. Enter the `debian-packaging` container:
 
    ```bash
-   docker exec -it go-debian-bash bash
+   docker exec -it go-debian-dev bash
    ```
 
    You will be inside the container with tools and environment set up for Debian packaging development.

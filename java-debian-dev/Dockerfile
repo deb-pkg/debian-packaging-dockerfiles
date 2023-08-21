@@ -1,9 +1,9 @@
 # go-debian-dev/Dockerfile
-FROM debian-dev AS go-debian-dev
+FROM debian-dev AS java-debian-dev
 
 # Install additional dependencies for go-debian-dev
 RUN sudo apt-get update && \
-    sudo apt-get install -y golang dh-golang dh-make-golang
+    sudo apt-get install -y default-jdk javahelper
 
 # Add environment variables to the user's shell profile
 ENV DEBEMAIL=$EMAIL DEBFULLNAME=$FULLNAME

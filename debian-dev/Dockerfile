@@ -7,7 +7,7 @@ RUN apt-get update && \
     lintian lintian-brush piuparts diffoscope duck adequate i18nspector cme licensecheck blhc \
     debhelper dh-make dupload dput reportbug autotools-dev dpkg-repack alien dpkg-dev-el \
     dpkg-cross debian-policy doc-debian developers-reference maint-guide packaging-tutorial how-can-i-help docbook-xml debiandoc-sgml debian-keyring debian-el \
-    autopkgtest debootstrap sbuild git-buildpackage equivs mc vim nano
+    autopkgtest debootstrap sbuild git-buildpackage equivs mc vim nano debmake
 
 # Set non-root user and group
 ARG USERNAME=debian
@@ -28,10 +28,7 @@ RUN apt-get update && \
 # Set the non-root user as the default user for the container
 USER $USERNAME
 
-# Add environment variables to the user's shell profile
-ENV DEBEMAIL=$EMAIL DEBFULLNAME=$FULLNAME
-RUN git config --global user.name "$EMAIL" && \
-    git config --global user.email "$FULLNAME"
+
 
 # Add mc.sh initialization and quilt alias to bash
 RUN echo 'if [ -f /usr/lib/mc/mc.sh ]; then . /usr/lib/mc/mc.sh; fi' >> /home/$USERNAME/.bashrc && \
